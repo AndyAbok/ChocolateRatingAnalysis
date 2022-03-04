@@ -14,9 +14,7 @@ Part One : Exploring the data
 """
 
 ##Consume in the data 
-#@benchmark chocolateData = CSV.read("chocolate.csv", DataFrame) 
 chocolateData =  CSV.File("chocolate.csv") |> DataFrame 
-#@benchmark chocolateData = CSV.Rows("chocolate.csv") |> DataFrame 
 
 # 1.)Getting the first 10 highly rated chocolate producing countries.
 
@@ -223,7 +221,6 @@ Plots.plot(commentsSamples[:,:rating_mean],
 #5.) Analysis to confirm an Hypothesis if the number of ingridients increases the ratings. 
 analyzeNoOfIngreds = 
     cleanData |>
-    #cleanDaata -> DataFrames.transform(cleanData,:noOfIngridients => ByRow(x -> Base.parse(Int64,x)),renamecols = false) |> 
     cleanData -> combine(groupby(cleanData,[:ingredients]),[:rating,:noOfIngridients] .=> mean)
 
 xs = analyzeNoOfIngreds[:,:noOfIngridients_mean]
