@@ -1,11 +1,6 @@
 """
 Part Two: Applying Machine Learning Model.
 """
-##
-println("--------------------------------")
-println("Start!")
-println("--------------------------------")
-
 
 #1.) Divide the data int training and test set. 
 function splitdf(df, pct)
