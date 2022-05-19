@@ -25,18 +25,20 @@ avgRatingForOriginCountries =
     chocolateData -> filter(:rating_length => >(30),chocolateData) |>
     chocolateData -> sort(chocolateData,:rating_mean,rev = true) 
 
-labels = string.(round.(first(avgRatingForOriginCountries[:,:2],10);digits=2))
+labels = string.(first(avgRatingForOriginCountries[:,:1],10))
+barLabels = string.(round.(first(avgRatingForOriginCountries[:,:2],10);digits=2))
 
-Plots.plot(first(avgRatingForOriginCountries[:,:1],10),
-     first(avgRatingForOriginCountries[:,:2],10),
-     seriestype = :bar,
-     orientation=:h,
-     size = (1200, 1000),
-     title  = "Average Rating of Cocoa Producing Countries",
-     xlabel = "Avearge Ratings",
-     ylabel = "Countries",
-     xlim = (3.0,3.50),
-     series_annotations = labels) 
+Plots.plot(first(avgRatingForOriginCountries[:,:2],10),
+           seriestype = :bar,
+           orientation=:h,
+           yticks = (1:length(labels),labels),
+           yflip = true,
+           size = (1200, 1000),
+           title  = "Average Rating of Cocoa Producing Countries",
+           xlabel = "Avearge Ratings",
+           ylabel = "Countries",
+           xlim = (3.0,3.50),
+           series_annotations = barLabels) 
 
 companyByRating = 
     chocolateData |>
